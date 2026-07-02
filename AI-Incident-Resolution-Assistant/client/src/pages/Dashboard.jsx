@@ -76,25 +76,57 @@ export default function Dashboard() {
 
         <Layout>
 
+            <div className="dashboard-hero">
+
+                <h1>
+
+                    👋 Welcome Back!
+
+                </h1>
+
+                <p>
+
+                    Monitor IT incidents, generate AI-powered resolutions,
+
+                    and resolve issues faster using your local RAG assistant.
+
+                </p>
+
+            </div>
+
             <PageHeader
 
-                title="Dashboard"
+                title="Incident Dashboard"
 
-                subtitle="Manage incidents and resolve issues using AI."
+                subtitle="Track, manage and resolve incidents efficiently."
 
             />
 
             <div
                 style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
                     marginBottom: "30px"
                 }}
             >
 
+                <h2>
+
+                    📊 Overview
+
+                </h2>
+
                 <Link
+
                     to="/incidents/new"
+
                     className="primary-btn"
+
                 >
+
                     + New Incident
+
                 </Link>
 
             </div>
@@ -103,7 +135,7 @@ export default function Dashboard() {
 
                 <StatCard
 
-                    title="Open Incidents"
+                    title="🟢 Open Incidents"
 
                     value={openIncidents}
 
@@ -111,7 +143,7 @@ export default function Dashboard() {
 
                 <StatCard
 
-                    title="High Priority"
+                    title="🔴 High Priority"
 
                     value={highPriority}
 
@@ -119,7 +151,7 @@ export default function Dashboard() {
 
                 <StatCard
 
-                    title="Resolved"
+                    title="✅ Resolved"
 
                     value={resolvedIncidents}
 
@@ -127,24 +159,39 @@ export default function Dashboard() {
 
             </div>
 
-            <h2
-                style={{
-                    marginTop: "40px",
-                    marginBottom: "20px"
-                }}
-            >
-                Recent Incidents
-            </h2>
+            <div className="section-title">
+
+                <h2>
+
+                    📂 Recent Incidents
+
+                </h2>
+
+                <p>
+
+                    Latest tickets created in the system
+
+                </p>
+
+            </div>
 
             {
 
                 incidents.length === 0 ? (
 
-                    <div className="card">
+                    <div className="empty-state">
+
+                        <h3>
+
+                            No incidents found
+
+                        </h3>
 
                         <p>
 
-                            No incidents found.
+                            Create your first incident to begin using
+
+                            the AI Incident Resolution Assistant.
 
                         </p>
 
@@ -152,12 +199,7 @@ export default function Dashboard() {
 
                 ) : (
 
-                    <div
-                        style={{
-                            display: "grid",
-                            gap: "20px"
-                        }}
-                    >
+                    <div className="incident-grid">
 
                         {
 

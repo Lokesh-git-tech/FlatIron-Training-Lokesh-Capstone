@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 import "../styles/layout.css";
@@ -25,50 +25,110 @@ export default function Sidebar() {
 
                 <h2 className="logo">
 
-                    AI Incident
+                    🤖 AI Incident
                     <br />
                     Resolution Assistant
 
                 </h2>
 
-                {user && (
+                {
 
-                    <p
-                        style={{
-                            marginBottom: "30px",
-                            color: "#CBD5E1"
-                        }}
-                    >
-                        Welcome,
-                        <br />
-                        <strong>{user.name}</strong>
-                    </p>
+                    user && (
 
-                )}
+                        <div className="user-card">
+
+                            <div className="avatar">
+
+                                {user.name.charAt(0).toUpperCase()}
+
+                            </div>
+
+                            <div>
+
+                                <p className="welcome">
+
+                                    Welcome
+
+                                </p>
+
+                                <strong>
+
+                                    {user.name}
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    )
+
+                }
 
                 <nav>
 
-                    <Link to="/dashboard">
-                        Dashboard
-                    </Link>
+                    <NavLink
 
-                    <Link to="/incidents/new">
-                        Create Incident
-                    </Link>
+                        to="/dashboard"
 
-                    <Link to="/profile">
-                        Profile
-                    </Link>
+                        className={({ isActive }) =>
+
+                            isActive ? "active-link" : ""
+
+                        }
+
+                    >
+
+                        📊 Dashboard
+
+                    </NavLink>
+
+                    <NavLink
+
+                        to="/incidents/new"
+
+                        className={({ isActive }) =>
+
+                            isActive ? "active-link" : ""
+
+                        }
+
+                    >
+
+                        ➕ Create Incident
+
+                    </NavLink>
+
+                    <NavLink
+
+                        to="/profile"
+
+                        className={({ isActive }) =>
+
+                            isActive ? "active-link" : ""
+
+                        }
+
+                    >
+
+                        👤 My Profile
+
+                    </NavLink>
 
                 </nav>
 
             </div>
 
             <button
+
                 className="logout-btn"
+
                 onClick={handleLogout}
+
             >
-                Logout
+
+                🚪 Logout
+
             </button>
 
         </aside>

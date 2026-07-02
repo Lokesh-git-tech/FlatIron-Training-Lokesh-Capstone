@@ -1,24 +1,67 @@
 .layout {
     display: flex;
     min-height: 100vh;
-    background: var(--background);
+    background: #F8FAFC;
 }
 
+/* ==========================================
+   Sidebar
+========================================== */
+
 .sidebar {
-    width: 260px;
+    width: 270px;
     background: #0F172A;
     color: white;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 30px 24px;
+    box-shadow: 4px 0 16px rgba(0,0,0,0.08);
 }
 
 .logo {
     font-size: 22px;
+    font-weight: 700;
     line-height: 1.4;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
+
+/* ==========================================
+   User Card
+========================================== */
+
+.user-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    margin-bottom: 30px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 12px;
+}
+
+.avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: #2563EB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+.welcome {
+    font-size: 12px;
+    color: #CBD5E1;
+    margin: 0;
+}
+
+/* ==========================================
+   Navigation
+========================================== */
 
 .sidebar nav {
     display: flex;
@@ -29,29 +72,69 @@
 .sidebar a {
     color: #E2E8F0;
     text-decoration: none;
-    padding: 12px 16px;
+    padding: 14px 16px;
     border-radius: 10px;
-    transition: 0.2s;
+    transition: all 0.25s ease;
+    font-weight: 500;
 }
 
 .sidebar a:hover {
     background: #1E293B;
 }
 
+.active-link {
+    background: #2563EB;
+    color: white !important;
+}
+
+/* ==========================================
+   Logout
+========================================== */
+
 .logout-btn {
+    width: 100%;
     background: #DC2626;
     color: white;
     border: none;
-    padding: 12px;
+    padding: 14px;
     border-radius: 10px;
     cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.2s;
 }
 
 .logout-btn:hover {
     background: #B91C1C;
 }
 
+/* ==========================================
+   Main Content
+========================================== */
+
 .content {
     flex: 1;
     padding: 40px;
+    overflow-y: auto;
+}
+
+/* ==========================================
+   Responsive
+========================================== */
+
+@media (max-width: 900px) {
+
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .content {
+        padding: 20px;
+    }
+
 }

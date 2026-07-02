@@ -1,0 +1,190 @@
+/* ==========================================================
+   AI Assistant
+========================================================== */
+
+.ai-card{
+    background:white;
+    border-radius:18px;
+    border:1px solid #E2E8F0;
+    padding:32px;
+    margin-top:35px;
+    box-shadow:0 12px 32px rgba(15,23,42,.06);
+}
+
+.ai-card h2{
+    margin-bottom:10px;
+    color:#0F172A;
+}
+
+.ai-subtitle{
+    color:#64748B;
+    margin-bottom:28px;
+    line-height:1.6;
+}
+
+/* ==========================================================
+   Prompt Buttons
+========================================================== */
+
+.prompt-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:24px;
+}
+
+.prompt-buttons button{
+    transition:.25s;
+}
+
+.prompt-buttons button:hover{
+    transform:translateY(-2px);
+}
+
+/* ==========================================================
+   Question Box
+========================================================== */
+
+.ai-question{
+    width:100%;
+    min-height:130px;
+    border:1px solid #CBD5E1;
+    border-radius:12px;
+    padding:16px;
+    font-size:15px;
+    resize:vertical;
+    margin-bottom:22px;
+    transition:.25s;
+    box-sizing:border-box;
+}
+
+.ai-question:focus{
+    outline:none;
+    border-color:#2563EB;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+/* ==========================================================
+   AI Banner
+========================================================== */
+
+.ai-banner{
+    display:flex;
+    flex-wrap:wrap;
+    gap:18px;
+    align-items:center;
+    background:#EFF6FF;
+    border:1px solid #BFDBFE;
+    border-radius:14px;
+    padding:18px;
+    margin:30px 0;
+}
+
+.ai-banner strong{
+    color:#1E3A8A;
+}
+
+.ai-banner span{
+    color:#334155;
+}
+
+/* ==========================================================
+   AI Result Sections
+========================================================== */
+
+.ai-result{
+    margin-top:28px;
+}
+
+.result-section{
+    background:#F8FAFC;
+    border:1px solid #E2E8F0;
+    border-radius:14px;
+    padding:24px;
+    margin-bottom:20px;
+}
+
+.result-section h3{
+    margin-bottom:16px;
+    color:#2563EB;
+    font-size:18px;
+}
+
+.result-section p{
+    line-height:1.8;
+    color:#334155;
+}
+
+.result-section ol{
+    margin-left:22px;
+}
+
+.result-section li{
+    margin-bottom:12px;
+    color:#334155;
+}
+
+/* ==========================================================
+   Sources
+========================================================== */
+
+.sources{
+    margin-top:40px;
+}
+
+.sources h2{
+    margin-bottom:20px;
+}
+
+.source-card{
+    background:white;
+    border:1px solid #E2E8F0;
+    border-left:6px solid #2563EB;
+    border-radius:14px;
+    padding:22px;
+    margin-bottom:18px;
+    box-shadow:0 8px 24px rgba(15,23,42,.05);
+    transition:.25s;
+}
+
+.source-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 16px 34px rgba(15,23,42,.10);
+}
+
+.source-card h3{
+    color:#0F172A;
+    margin-bottom:14px;
+}
+
+.source-card p{
+    margin:8px 0;
+    color:#475569;
+}
+
+/* ==========================================================
+   Loading
+========================================================== */
+
+.ai-loading{
+    margin-top:20px;
+    color:#2563EB;
+    font-style:italic;
+}
+
+/* ==========================================================
+   Responsive
+========================================================== */
+
+@media(max-width:768px){
+
+    .ai-card{
+        padding:22px;
+    }
+
+    .ai-banner{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+}

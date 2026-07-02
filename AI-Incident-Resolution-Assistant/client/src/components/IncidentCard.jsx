@@ -4,7 +4,12 @@ import "../styles/incident.css";
 
 export default function IncidentCard({ incident }) {
 
-    const priorityClass = incident.priority.toLowerCase();
+    const priorityClass = (incident.priority || "Medium").toLowerCase();
+
+    const statusClass =
+        incident.status === "Resolved"
+            ? "status-resolved"
+            : "status-open";
 
     return (
 
@@ -12,7 +17,17 @@ export default function IncidentCard({ incident }) {
 
             <div className="incident-header">
 
-                <h2>{incident.title}</h2>
+                <div>
+
+                    <h2>{incident.title}</h2>
+
+                    <p className="incident-category">
+
+                        {incident.category}
+
+                    </p>
+
+                </div>
 
                 <span className={`badge ${priorityClass}`}>
 
@@ -22,37 +37,50 @@ export default function IncidentCard({ incident }) {
 
             </div>
 
-            <p>
+            <div className="incident-meta">
 
-                <strong>Status:</strong>{" "}
+                <p>
 
-                <span
-                    className={
-                        incident.status === "Resolved"
-                            ? "status-resolved"
-                            : "status-open"
+                    <strong>Status:</strong>{" "}
+
+                    <span className={statusClass}>
+
+                        {incident.status}
+
+                    </span>
+
+                </p>
+
+                <p>
+
+                    <strong>Created:</strong>{" "}
+
+                    {
+
+                        incident.created_at
+
+                            ? new Date(
+                                  incident.created_at
+                              ).toLocaleDateString()
+
+                            : "N/A"
+
                     }
-                >
-                    {incident.status}
-                </span>
 
-            </p>
+                </p>
 
-            <p>
+            </div>
 
-                <strong>Category:</strong>{" "}
+            <p className="incident-description">
 
-                {incident.category}
+                {
 
-            </p>
+                    incident.description
+                        ? incident.description.substring(0, 120) +
+                          (incident.description.length > 120 ? "..." : "")
+                        : "No description available."
 
-            <p>
-
-                <strong>Created:</strong>{" "}
-
-                {new Date(
-                    incident.created_at
-                ).toLocaleDateString()}
+                }
 
             </p>
 

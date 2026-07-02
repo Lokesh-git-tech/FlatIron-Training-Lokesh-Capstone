@@ -1,16 +1,22 @@
+import "../styles/components.css";
+
 export default function Loading() {
 
     return (
 
-        <div
-            style={{
-                textAlign: "center",
-                padding: "60px",
-                fontSize: "22px"
-            }}
-        >
+        <div className="card">
 
-            Loading...
+            <h2>
+
+                Loading...
+
+            </h2>
+
+            <p>
+
+                Please wait while we load your data.
+
+            </p>
 
         </div>
 

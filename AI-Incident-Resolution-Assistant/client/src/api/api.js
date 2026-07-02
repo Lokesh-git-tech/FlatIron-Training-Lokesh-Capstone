@@ -1,11 +1,17 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://127.0.0.1:5000",
+
+    baseURL: "/api",
+
     withCredentials: true,
+
     headers: {
+
         "Content-Type": "application/json"
+
     }
+
 });
 
 // Authentication
@@ -43,7 +49,9 @@ export const deleteIncident = (id) =>
 
 export const generateAI = (id, question) =>
     api.post(`/incidents/${id}/ai`, {
+
         question
+
     });
 
 export default api;

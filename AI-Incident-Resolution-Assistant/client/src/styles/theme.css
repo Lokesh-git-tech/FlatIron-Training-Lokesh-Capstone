@@ -19,10 +19,10 @@
 
     --danger: #DC2626;
 
-    --radius: 10px;
+    --radius: 12px;
 
     --shadow:
-        0 4px 10px rgba(0,0,0,.08);
+        0 6px 16px rgba(0,0,0,.08);
 
     --transition: .2s ease;
 

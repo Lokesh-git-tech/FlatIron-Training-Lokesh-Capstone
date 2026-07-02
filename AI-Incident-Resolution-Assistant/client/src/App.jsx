@@ -3,10 +3,12 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import CreateIncident from "./pages/CreateIncident";
+import EditIncident from "./pages/EditIncident";
+import IncidentDetails from "./pages/IncidentDetails";
+import Profile from "./pages/Profile";
 
 import ProtectedRoute from "./components/ProtectedRoute";
-
-import CreateIncident from "./pages/CreateIncident";
 
 function App() {
 
@@ -30,20 +32,14 @@ function App() {
             />
 
             <Route
-
                 path="/dashboard"
-
                 element={
-
                     <ProtectedRoute>
-
                         <Dashboard />
-
                     </ProtectedRoute>
-
                 }
-
             />
+
             <Route
                 path="/incidents/new"
                 element={
@@ -52,6 +48,39 @@ function App() {
                     </ProtectedRoute>
                 }
             />
+
+            <Route
+                path="/incidents/:id"
+                element={
+                    <ProtectedRoute>
+                        <IncidentDetails />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/incidents/:id/edit"
+                element={
+                    <ProtectedRoute>
+                        <EditIncident />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="/profile"
+                element={
+                    <ProtectedRoute>
+                        <Profile />
+                    </ProtectedRoute>
+                }
+            />
+
+            <Route
+                path="*"
+                element={<Navigate to="/dashboard" replace />}
+            />
+
         </Routes>
 
     );
