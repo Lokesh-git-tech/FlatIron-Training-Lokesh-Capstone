@@ -1,0 +1,35 @@
+:root {
+
+    --primary: #2563EB;
+    --primary-hover: #1D4ED8;
+
+    --background: #F8FAFC;
+
+    --card: #FFFFFF;
+
+    --border: #E2E8F0;
+
+    --text: #1E293B;
+
+    --text-light: #64748B;
+
+    --success: #16A34A;
+
+    --warning: #F59E0B;
+
+    --danger: #DC2626;
+
+    --radius: 10px;
+
+    --shadow:
+        0 4px 10px rgba(0,0,0,.08);
+
+    --transition: .2s ease;
+
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+}

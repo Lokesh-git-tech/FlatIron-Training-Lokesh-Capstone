@@ -1,0 +1,63 @@
+.page-header{
+
+    margin-bottom:30px;
+
+}
+
+.page-header h1{
+
+    font-size:34px;
+
+    margin-bottom:8px;
+
+}
+
+.page-header p{
+
+    color:var(--text-light);
+
+}
+
+.primary-btn{
+
+    background:var(--primary);
+
+    color:white;
+
+    padding:12px 22px;
+
+    border-radius:8px;
+
+    font-weight:600;
+
+}
+
+.primary-btn:hover{
+
+    background:var(--primary-hover);
+
+}
+
+.secondary-btn{
+
+    background:white;
+
+    border:1px solid var(--border);
+
+    padding:12px 22px;
+
+    border-radius:8px;
+
+}
+
+.card{
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:24px;
+
+    box-shadow:var(--shadow);
+
+}
