@@ -19,7 +19,9 @@ def signup():
             "error": "Name, email and password are required."
         }), 400
 
-    existing_user = User.query.filter_by(email=email.lower()).first()
+    existing_user = User.query.filter_by(
+        email=email.lower()
+    ).first()
 
     if existing_user:
         return jsonify({
@@ -37,6 +39,11 @@ def signup():
     db.session.commit()
 
     session["user_id"] = new_user.id
+
+    print("=" * 60)
+    print("SIGNUP SESSION")
+    print(dict(session))
+    print("=" * 60)
 
     return jsonify({
         "id": new_user.id,
@@ -58,11 +65,18 @@ def login():
             "error": "Email and password are required."
         }), 400
 
-    user = User.query.filter_by(email=email.lower()).first()
+    user = User.query.filter_by(
+        email=email.lower()
+    ).first()
 
     if user and user.authenticate(password):
 
         session["user_id"] = user.id
+
+        print("=" * 60)
+        print("LOGIN SESSION CREATED")
+        print(dict(session))
+        print("=" * 60)
 
         return jsonify({
             "id": user.id,
@@ -77,6 +91,11 @@ def login():
 
 @auth_bp.route("/check_session", methods=["GET"])
 def check_session():
+
+    print("=" * 60)
+    print("CHECK SESSION")
+    print(dict(session))
+    print("=" * 60)
 
     user_id = session.get("user_id")
 
@@ -101,6 +120,11 @@ def check_session():
 
 @auth_bp.route("/logout", methods=["DELETE"])
 def logout():
+
+    print("=" * 60)
+    print("LOGOUT SESSION")
+    print(dict(session))
+    print("=" * 60)
 
     session.pop("user_id", None)
 
