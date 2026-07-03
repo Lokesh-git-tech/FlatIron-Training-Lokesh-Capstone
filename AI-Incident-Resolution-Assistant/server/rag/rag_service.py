@@ -3,6 +3,8 @@ import os
 
 from dotenv import load_dotenv
 
+from openai import AzureOpenAI
+
 from langchain_chroma import Chroma
 from langchain_ollama import ChatOllama
 from langchain_ollama import OllamaEmbeddings
@@ -16,9 +18,22 @@ class RAGService:
 
     def __init__(self):
 
+        self.provider = os.getenv(
+            "AI_PROVIDER",
+            "ollama"
+        ).lower()
+
+        # ---------------------------------------
+        # Embeddings (Still using Ollama)
+        # ---------------------------------------
+
         self.embeddings = OllamaEmbeddings(
             model=os.getenv("EMBEDDING_MODEL")
         )
+
+        # ---------------------------------------
+        # Chroma Vector Store
+        # ---------------------------------------
 
         self.vector_store = Chroma(
             persist_directory=os.getenv("CHROMA_PATH"),
@@ -26,11 +41,27 @@ class RAGService:
             collection_name="incident_resolution"
         )
 
-        self.llm = ChatOllama(
-            model=os.getenv("OLLAMA_MODEL"),
-            temperature=0,
-            timeout=120
-        )
+        # ---------------------------------------
+        # AI Provider
+        # ---------------------------------------
+
+        if self.provider == "azure":
+
+            self.client = AzureOpenAI(
+                api_key=os.getenv("AZURE_OPENAI_API_KEY"),
+                api_version=os.getenv("AZURE_OPENAI_API_VERSION"),
+                azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT")
+            )
+
+        else:
+
+            self.llm = ChatOllama(
+                model=os.getenv("OLLAMA_MODEL"),
+                temperature=0,
+                timeout=120
+            )
+
+    # --------------------------------------------------------
 
     def retrieve(self, question):
 
@@ -39,12 +70,14 @@ class RAGService:
             k=4
         )
 
+    # --------------------------------------------------------
+
     def generate_resolution(self, incident, question):
 
         docs = self.retrieve(question)
 
         context = "\n\n".join(
-            [doc.page_content for doc in docs]
+            doc.page_content for doc in docs
         )
 
         prompt = f"""
@@ -79,22 +112,83 @@ KNOWLEDGE BASE
 {context}
 """
 
-        response = self.llm.invoke(prompt)
+        # ====================================================
+        # Azure OpenAI
+        # ====================================================
 
-        answer = response.content.strip()
+        if self.provider == "azure":
+
+            response = self.client.chat.completions.create(
+
+                model=os.getenv(
+                    "AZURE_OPENAI_DEPLOYMENT"
+                ),
+
+                temperature=0,
+
+                messages=[
+
+                    {
+                        "role": "system",
+                        "content": SYSTEM_PROMPT
+                    },
+
+                    {
+                        "role": "user",
+                        "content": prompt
+                    }
+
+                ]
+
+            )
+
+            answer = response.choices[0].message.content.strip()
+
+            model_used = os.getenv(
+                "AZURE_OPENAI_DEPLOYMENT"
+            )
+
+        # ====================================================
+        # Ollama
+        # ====================================================
+
+        else:
+
+            response = self.llm.invoke(prompt)
+
+            answer = response.content.strip()
+
+            model_used = os.getenv(
+                "OLLAMA_MODEL"
+            )
+
+        # ====================================================
+        # Parse JSON
+        # ====================================================
 
         try:
+
             parsed = json.loads(answer)
 
         except json.JSONDecodeError:
 
             parsed = {
+
                 "issue_summary": answer,
+
                 "root_cause": "Unable to determine.",
+
                 "resolution_steps": [],
+
                 "escalation": "Manual investigation required.",
+
                 "confidence": "Low"
+
             }
+
+        # ====================================================
+        # Sources
+        # ====================================================
 
         sources = []
 
@@ -114,12 +208,16 @@ KNOWLEDGE BASE
 
             })
 
+        # ====================================================
+        # Final Response
+        # ====================================================
+
         return {
 
             "response": parsed,
 
             "sources": sources,
 
-            "model": os.getenv("OLLAMA_MODEL")
+            "model": model_used
 
         }
